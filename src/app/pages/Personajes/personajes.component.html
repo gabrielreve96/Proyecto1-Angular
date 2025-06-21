@@ -1,0 +1,70 @@
+<div class="personajes-container">
+  <h1 class="personajes-title">Personajes</h1>
+
+  @if (totalPersonajes() > 0) {
+    <p>Total Personajes: {{ totalPersonajes() }}</p>
+  } @else {
+    <p class="personajes-empty">No hay personajes disponibles</p>
+  }
+
+  <div class="acciones">
+    <button type="button" class="boton-crear" (click)="mostrarModal()">Crear nuevo personaje</button>
+  </div>
+
+  <div *ngIf="modal" class="personaje-modal">
+    <p class="personaje-modal-close" (click)="mostrarModal()">X</p>
+
+    <h5>Nuevo Personaje</h5>
+     
+    <form class="personaje-form">
+      <div class="personaje-form-group">
+        <label for="nombre" class="personaje-label">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" class="personaje-input" required placeholder="nombre del personaje"[value]="nombre()"   (change)="nombre.set(txtNombre.value)" #txtNombre>
+      </div>
+      <div class="personaje-form-group">
+        <label for="poder" class="personaje-label">Poder:</label>
+<input 
+  type="number"  
+  class="personaje-input" 
+  required 
+  placeholder="poder del personaje"
+  [value]="poder()"   
+  (input)="poder.set(+txtPower.value)" 
+  #txtPower
+>
+</div>
+      <button type="button" class="personaje-button" (click)="crearPersonaje()">Guardar</button>
+
+    </form>
+  </div>
+
+  <table class="personajes-table">
+    <thead class="personajes-table-head">
+      <tr class="personajes-table-header-row">
+        <th class="personajes-table-header">ID</th>
+        <th class="personajes-table-header">Nombre</th>
+        <th class="personajes-table-header">Poder</th>
+        <th class="personajes-table-header">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="personajes-table-body">
+      @for (personaje of personajes(); track personaje.id) {
+        <tr 
+  class="personajes-table-row"
+   [ngClass]="{
+    'row-power-weak': personaje.poder <= 2000,
+    'row-power-medium': personaje.poder > 2000 && personaje.poder < 7000,
+    'row-power-ok': personaje.poder >= 7000
+  }"
+        >
+          <td class="personajes-table-cell">{{ personaje.id }}</td>
+          <td class="personajes-table-cell" [class.text_name_g]="personaje.nombre.startsWith('G')">{{ personaje.nombre }}</td>
+          <td class="personajes-table-cell">{{ personaje.poder }}</td>
+          <td class="personajes-table-cell">
+            <button class="personajes-table-button" (click)="eliminarPersonaje(personaje.id)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

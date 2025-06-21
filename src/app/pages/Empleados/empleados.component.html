@@ -1,0 +1,25 @@
+<div class="empleados-container">
+  <h1 class="empleados-title">Empleados</h1>
+  <div class="empleados-table-wrapper">
+    <table class="empleados-table">
+      <thead class="empleados-table-head">
+        <tr class="empleados-table-row empleados-table-header-row">
+          <th class="empleados-table-header">ID</th>
+          <th class="empleados-table-header">Nombre</th>
+          <th class="empleados-table-header">Apellido</th>
+          <th class="empleados-table-header">Correo Electrónico</th>
+          <th class="empleados-table-header">Teléfono</th>
+        </tr>
+      </thead>
+      <tbody class="empleados-table-body">
+        <tr *ngFor="let empleado of empleados" class="empleados-table-row">
+          <td class="empleados-table-cell">{{ empleado.id }}</td>
+          <td class="empleados-table-cell">{{ empleado.name }}</td>
+          <td class="empleados-table-cell">{{ empleado.username }}</td>
+          <td class="empleados-table-cell">{{ empleado.email }}</td>
+          <td class="empleados-table-cell">{{ empleado.phone }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
