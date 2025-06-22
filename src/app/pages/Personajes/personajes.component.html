@@ -5,38 +5,17 @@
    <p>Ttoal Personajes : {{totalPersonajes()}}</p>
  
 
-  <div class="acciones">
-    <button type="button" class="boton-crear" (click)="mostrarModal()">Crear nuevo personaje</button>
-  </div>
 
-  <div *ngIf="modal" class="personaje-modal">
-    <p class="personaje-modal-close" (click)="mostrarModal()">X</p>
 
-    <h5>Nuevo Personaje</h5>
-     
-    <form class="personaje-form">
-      <div class="personaje-form-group">
-        <label for="nombre" class="personaje-label">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" class="personaje-input" required placeholder="nombre del personaje"[value]="nombre()"   (change)="nombre.set(txtNombre.value)" #txtNombre>
-      </div>
-      <div class="personaje-form-group">
-        <label for="poder" class="personaje-label">Poder:</label>
-<input 
-  type="number"  
-  class="personaje-input" 
-  required 
-  placeholder="poder del personaje"
-  [value]="poder()"   
-  (input)="poder.set(+txtPower.value)" 
-  #txtPower
->
-</div>
-      <button type="button" class="personaje-button" (click)="crearPersonaje()">Guardar</button>
 
-    </form>
-  </div>
+   <app-nuevopersonaje
+   (nuevoPersonaje)="crearPersonaje($event)"
+   
+   ></app-nuevopersonaje>
 
-   <app-table-list 
+
+  <app-table-list 
+  listName="Personajes"
   [data]="personajes()" 
   [columns]="[
     { header: 'id', field: 'id' },

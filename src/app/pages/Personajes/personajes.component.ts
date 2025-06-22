@@ -2,12 +2,13 @@ import { CommonModule, NgClass } from "@angular/common";
 import { Component, computed, signal } from "@angular/core";
 import { Personaje } from "../../interface/personajes";
 import { TableListComponent } from "../../components/Table/table-list/table-list.component";
+import { NuevopersonajeComponent } from "../../components/nuevopersonaje/nuevopersonaje.component";
 
 @Component({
     selector: 'app-personajes',
     styleUrls: ['./personajes.component.css'],
     templateUrl: './personajes.component.html',
-    imports: [CommonModule  ,TableListComponent ],
+    imports: [CommonModule, TableListComponent, NuevopersonajeComponent],
   
 })
 export class PersonajesComponent {
@@ -48,22 +49,11 @@ export class PersonajesComponent {
     }
 
 
-    crearPersonaje() {
-        const nuevoPersonaje: Personaje = {
-            id: this.personajes().length + 1,
-            nombre: this.nombre(),
-            poder: this.poder()
-        };
-        this.personajes.update(personajes => [...personajes, nuevoPersonaje]);
-        this.modal = false;
+    crearPersonaje(personaje: Personaje) {
+       
+        this.personajes.update(personajes => [...personajes, personaje]);
+        
     }
-eliminarPersonaje(id: number) {
-  this.personajes.update(personajes => {
-    const updated = personajes.filter(p => p.id !== id);
-    console.log('Personajes después de eliminar:', updated);
-    return updated;
-  });
-}
 
 
     editarPersonaje(id: number, nombre: string, poder: number) {
@@ -71,6 +61,12 @@ eliminarPersonaje(id: number) {
             personajes.map(p => p.id === id ? { ...p, nombre, poder } : p)
         );
         this.modal = false;
+    }
+
+    eliminarPersonaje(id: number) {
+        this.personajes.update(personajes => 
+            personajes.filter(p => p.id !== id)
+        );
     }
 
     

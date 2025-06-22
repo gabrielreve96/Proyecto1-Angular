@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, signal, Signal } from "@angular/core";
+import { Component, computed, signal, Signal } from "@angular/core";
 import { TableListComponent } from "../../components/Table/table-list/table-list.component";
 import { Empleado } from "../../interface/empleados";
 
@@ -30,6 +30,14 @@ export class EmpleadosComponents {
             })
             .catch(error => console.error('Error fetching empleados:', error));
     }
+
+
+    eliminarEmpleado(id: number) {
+        this.empleados.update(empleados => empleados.filter(empleado => empleado.id !== id));
+    }  
+    
+    
+    totalEmpleados = computed(()=> this.empleados.length)
 
 
 }

@@ -1,6 +1,8 @@
 <div class="empleados-container">
   <h1 class="empleados-title">Empleados</h1>
+  <p>Total Empleados: {{ empleados().length }}</p>
 <app-table-list 
+  listName = "Empleados"
   [data]="empleados()" 
   [columns]="[
     { header: 'ID', field: 'id' },
@@ -8,7 +10,7 @@
     { header: 'Usuario', field: 'username' },
     { header: 'Correo', field: 'email' },
     { header: 'Teléfono', field: 'phone' }
-  ]">
+  ]" (delete)="eliminarEmpleado($event)">
 </app-table-list>
 
 

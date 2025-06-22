@@ -12,10 +12,15 @@ export class TableListComponent {
   @Input() data!: any[];
   @Input() columns!: { header: string; field: string }[];
   @Output() delete = new EventEmitter<number>();
+  @Input() listName: string = '';
 
-  constructor() {}
+  constructor() {  this.mostrandoListName() }
 
   onDeleteRow(id: number) {
     this.delete.emit(id);
   }
+
+   mostrandoListName(){
+    return this.listName ? this.listName : 'Lista de Datos';
+   }
 }
