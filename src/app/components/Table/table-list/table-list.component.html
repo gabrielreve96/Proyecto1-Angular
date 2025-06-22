@@ -1,0 +1,23 @@
+<table class="empleados-table">
+  <thead class="empleados-table-head">
+    <tr class="empleados-table-row empleados-table-header-row">
+      <th *ngFor="let col of columns" class="empleados-table-header">{{ col.header }}</th>
+      <th class="empleados-table-header">Acciones</th>
+    </tr>
+  </thead>
+  <tbody class="empleados-table-body">
+    <tr *ngFor="let row of data" class="empleados-table-row">
+      <td *ngFor="let col of columns" 
+          class="empleados-table-cell"
+          [ngClass]="{
+            'cell-power-low': col.field === 'poder' && row[col.field] < 1000,
+            'cell-power-high': col.field === 'poder' && row[col.field] >= 200
+          }">
+        {{ row[col.field] }}
+      </td>
+      <td class="empleados-table-cell">
+        <button class="empleados-table-button" (click)="onDeleteRow(row.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

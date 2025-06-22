@@ -1,5 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+
+
+
+interface NavbarLink {
+  label: string;
+  route: string;
+}
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,5 +20,23 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 })
 export class Navbar {
+
+  public links: NavbarLink[] = [
+    { label: 'Home', route: '/' },
+    { label: 'Empleado', route: '/empleados' },
+    { label: 'Personajes', route: '/personajes' }
+  ];
+
+  constructor(){
+
+  }
+
+rutas=computed(()=>{
+  return this.links.map(link => ({
+    ...link,
+    isActive: window.location.pathname === link.route
+  }));
+})
+
 
 }

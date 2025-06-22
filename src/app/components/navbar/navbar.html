@@ -2,18 +2,13 @@
     <div class="navbar-container">
         <a class="navbar-brand" href="#">Navbar</a>
         <ul class="navbar-nav">
+          
+             @for (rutas of rutas(); track $index) {
             <li class="nav-item">
-                <a class="nav-link active"  [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+                <a class="nav-link active"  [routerLink]="[rutas.route]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{rutas.label}}</a>
             </li>
-            <li class="nav-item"> 
-                <a class="nav-link" [routerLink]="['/empleados']" routerLinkActive="active"   [routerLinkActiveOptions]="{exact:true}">Empleados</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/personajes']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Personajes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" tabindex="-1" aria-disabled="true" >Disabled</a>
-            </li>
+             }
+           
         </ul>
     </div>
 </nav>

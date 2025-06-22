@@ -1,43 +1,22 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, signal, Signal } from "@angular/core";
+import { TableListComponent } from "../../components/Table/table-list/table-list.component";
+import { Empleado } from "../../interface/empleados";
 
 
 
-interface Empleado {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    address: {
-        street: string;
-        suite: string;
-        city: string;
-        zipcode: string;
-        geo: {
-            lat: string;
-            lng: string;
-        };
-    };
-    phone: string;
-    website: string;
-    company: {
-        name: string;
-        catchPhrase: string;
-        bs: string;
-    };
-}
 
 @Component({
     templateUrl: './empleados.component.html',
     styleUrls: ['./empleados.component.css'],
-    imports: [CommonModule],
+    imports: [CommonModule, TableListComponent],
 })
 
 
 export class EmpleadosComponents {
      
     private  url = "https://jsonplaceholder.typicode.com/users";
-    public empleados:   Empleado[] = [];
+    public empleados = signal<Empleado[]>([]);
 
     constructor() {
         this.fetchEmpleados();
@@ -47,7 +26,7 @@ export class EmpleadosComponents {
         fetch(this.url)
             .then(response => response.json())
             .then(data => {
-                this.empleados = data;
+                this.empleados.set(data);
             })
             .catch(error => console.error('Error fetching empleados:', error));
     }

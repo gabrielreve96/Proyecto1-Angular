@@ -1,16 +1,13 @@
 import { CommonModule, NgClass } from "@angular/common";
 import { Component, computed, signal } from "@angular/core";
+import { Personaje } from "../../interface/personajes";
+import { TableListComponent } from "../../components/Table/table-list/table-list.component";
 
-interface Personaje {
-    id:number;
-    nombre: string;
-    poder: number;
-}
 @Component({
     selector: 'app-personajes',
     styleUrls: ['./personajes.component.css'],
     templateUrl: './personajes.component.html',
-    imports: [CommonModule],
+    imports: [CommonModule  ,TableListComponent ],
   
 })
 export class PersonajesComponent {
@@ -18,12 +15,7 @@ export class PersonajesComponent {
     public nombre= signal<string>('');
     public poder= signal<number>(0);
     personajes = signal<Personaje[]>([
-        { id: 1, nombre: 'Goku', poder: 9000 },
-        { id: 2, nombre: 'Vegeta', poder: 8500 },
-        { id: 3, nombre: 'Piccolo', poder: 8000 },
-        { id: 4, nombre: 'Gohan', poder: 7000 },
-        { id: 5, nombre: 'Krillin', poder: 5000 }
-    ])
+      ])
 
     modal: boolean = false;
 
@@ -32,7 +24,12 @@ export class PersonajesComponent {
        this.mostrarDetalles()
     }
 
-   
+
+
+
+    totalPersonajes = computed(() => this.personajes().length);
+    
+    
 
     powerClass(id: number) {
         return {
@@ -60,10 +57,15 @@ export class PersonajesComponent {
         this.personajes.update(personajes => [...personajes, nuevoPersonaje]);
         this.modal = false;
     }
+eliminarPersonaje(id: number) {
+  this.personajes.update(personajes => {
+    const updated = personajes.filter(p => p.id !== id);
+    console.log('Personajes después de eliminar:', updated);
+    return updated;
+  });
+}
 
-    eliminarPersonaje(id: number) {
-        this.personajes.update(personajes => personajes.filter(p => p.id !== id));
-    }
+
     editarPersonaje(id: number, nombre: string, poder: number) {
         this.personajes.update(personajes => 
             personajes.map(p => p.id === id ? { ...p, nombre, poder } : p)
@@ -71,8 +73,6 @@ export class PersonajesComponent {
         this.modal = false;
     }
 
-    totalPersonajes(){
-        return this.personajes().length;
-    }
+    
  
 }
