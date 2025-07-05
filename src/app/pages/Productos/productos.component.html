@@ -1,18 +1,23 @@
 <h1>Página de productos</h1>
 
 <div class="productos-contenedor">
+  <p>Cantidad productos: {{ productoService.cantidadProductos() }} </p>
+
   <div class="productos-tabla">
     <app-table-list 
-      [data]="productos()"  
+      [data]="productoService.productos()"  
       [columns]="[
         { header: 'id', field: 'id' },
         { header: 'nombre', field: 'nombre' },
         { header: 'descripcion', field: 'descripcion' }
       ]"
-    (delete)="deleteProducto($event)"></app-table-list>
+      (delete)="productoService.deleteProducto($event)">
+    </app-table-list>
   </div>
 
   <div class="productos-formulario">
-    <app-new-product (dataProduct)="newProduct($event)"></app-new-product>
+    <app-new-product 
+      (dataProduct)="productoService.newProduct($event)">
+    </app-new-product>
   </div>
 </div>
