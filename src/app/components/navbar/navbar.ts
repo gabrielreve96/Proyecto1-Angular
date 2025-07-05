@@ -24,7 +24,8 @@ export class Navbar {
   public links: NavbarLink[] = [
     { label: 'Home', route: '/' },
     { label: 'Empleado', route: '/empleados' },
-    { label: 'Personajes', route: '/personajes' }
+    { label: 'Personajes', route: '/personajes' },
+    {label:"Productos", route: '/productos'},
   ];
 
   constructor(){
