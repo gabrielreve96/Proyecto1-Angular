@@ -1,0 +1,18 @@
+<h1>Página de productos</h1>
+
+<div class="productos-contenedor">
+  <div class="productos-tabla">
+    <app-table-list 
+      [data]="productos()"  
+      [columns]="[
+        { header: 'id', field: 'id' },
+        { header: 'nombre', field: 'nombre' },
+        { header: 'descripcion', field: 'descripcion' }
+      ]"
+    (delete)="deleteProducto($event)"></app-table-list>
+  </div>
+
+  <div class="productos-formulario">
+    <app-new-product (dataProduct)="newProduct($event)"></app-new-product>
+  </div>
+</div>

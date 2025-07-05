@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, EventEmitter, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, EventEmitter, signal, output } from '@angular/core';
 import { Personaje } from '../../interface/personajes';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -11,7 +11,9 @@ import { CommonModule } from '@angular/common';
 export class NuevopersonajeComponent {
     public nombre= signal<string>('');
     public poder= signal<number>(0);
-    @Output() nuevoPersonaje  = new EventEmitter<Personaje>();
+     nuevoperonaje  =  output<Personaje>();
+   // @Output() nuevoPersonaje  = new EventEmitter<Personaje>();
+     
     modal: boolean = false;
 
    
@@ -26,7 +28,7 @@ export class NuevopersonajeComponent {
             nombre: this.nombre(),
             poder: this.poder()
         };
-        this.nuevoPersonaje.emit(nuevoPersonaje);
+        this.nuevoperonaje.emit(nuevoPersonaje);
         this.modal = false;
         this.nombre.set(''); // Resetea el nombre
         this.poder.set(0); // Resetea el poder

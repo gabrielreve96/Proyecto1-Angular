@@ -1,0 +1,24 @@
+<main class="product-page">
+<section class="product-form-section">
+    <h1 class="section-title">➕ Añadir Nuevo Producto</h1>
+    <form class="product-form">
+      <div class="form-group">
+        <label for="name">Nombre del Producto</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Ej: Ibuprofeno 600mg"
+          [value]="productService.nombre()" (input)="productService.nombre.set($any($event.target).value)" required required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea id="description" name="description" class="form-control"
+          placeholder="Agrega una descripción clara del producto" [value]="productService.descripcion()"
+          (input)="productService.descripcion.set($any($event.target).value)" required>
+
+        </textarea>
+      </div>
+
+      <button type="button" class="submit-btn" (click)="newProduct()">Crear Producto</button>
+
+    </form>
+  </section>
+</main>

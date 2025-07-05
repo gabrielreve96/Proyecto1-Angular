@@ -1,0 +1,18 @@
+.productos-contenedor {
+  display: flex;
+  gap: 2rem; /* separación entre tabla y formulario */
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap; /* para que se acomode en pantallas pequeñas */
+  margin-top: 1rem;
+}
+
+.productos-tabla {
+  flex: 2; /* ocupa más espacio */
+  min-width: 300px;
+}
+
+.productos-formulario {
+  flex: 1; /* ocupa menos espacio */
+  min-width: 280px;
+}
